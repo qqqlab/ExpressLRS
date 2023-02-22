@@ -2,7 +2,7 @@ import serial # pip install pyserial
 import time
 
 com = "COM11"
-freq = 62.5
+freq = 100
 crsf_sync = 0xc8
 
 def crc_init():
