@@ -291,7 +291,7 @@ void sendELRSstatus()
   // to support sending a params.msg, buffer should be extended by the strlen of the message
   // and copied into params->msg (with trailing null)
   strcpy(params->msg, warningInfo);
-  crsf.packetQueueExtended(0x2E, &buffer, sizeof(buffer));
+  crsf.packetQueueExtended(CRSF_FRAMETYPE_ELRS_STATUS, &buffer, sizeof(buffer));
 }
 
 void luaRegisterDevicePingCallback(void (*callback)())
@@ -355,7 +355,7 @@ bool luaHandleUpdateParameter()
         DBGVLN("ELRS status request");
         updateElrsFlags();
         sendELRSstatus();
-      } else if (crsf.ParameterUpdateData[1] == 0x2E) {
+      } else if (crsf.ParameterUpdateData[1] == CRSF_FRAMETYPE_ELRS_STATUS) {
         luaSupressCriticalErrors();
 #endif
       } else {
