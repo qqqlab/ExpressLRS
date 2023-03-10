@@ -1292,7 +1292,8 @@ void loop()
   /* Send TLM updates to handset if connected + reporting period
    * is elapsed. This keeps handset happy dispite of the telemetry ratio */
   if ((connectionState == connected) && (LastTLMpacketRecvMillis != 0) &&
-      (now >= (uint32_t)(firmwareOptions.tlm_report_interval + TLMpacketReported))) {
+      (now - TLMpacketReported >= firmwareOptions.tlm_report_interval) 
+  {
     crsf.sendLinkStatisticsToTX();
     TLMpacketReported = now;
   }
