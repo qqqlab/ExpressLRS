@@ -863,7 +863,7 @@ bool CRSF::UARTwdt()
     bool retval = false;
 #if !defined(DEBUG_TX_FREERUN)
     uint32_t now = millis();
-    if (now >= (UARTwdtLastChecked + UARTwdtInterval))
+    if (now - UARTwdtLastChecked >= UARTwdtInterval)
     {
         if (BadPktsCount >= GoodPktsCount)
         {
